@@ -1,6 +1,6 @@
 # project
 
-verise company task mission flutter project.
+VeRise company task mission flutter project.
 
 ## Getting Started
 
