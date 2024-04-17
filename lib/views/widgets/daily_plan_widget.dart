@@ -25,7 +25,7 @@ Widget DailyPlanWidget(context) {
       margin: EdgeInsets.only(top: 16, left: 16, right: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [BoxShadow(color: AppColor.secondary, blurRadius: 8)],
+          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 8)],
           color: Colors.black,
           image: DecorationImage(
               image: AssetImage("assets/images/featured1.jpg"),
@@ -35,8 +35,8 @@ Widget DailyPlanWidget(context) {
         alignment: Alignment.center,
         margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColor.secondary)),
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: ClipRRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
@@ -47,7 +47,8 @@ Widget DailyPlanWidget(context) {
                 color: Colors.black.withOpacity(0.26),
               ),
               child: Text(
-                "Today Suggestion Daily Plan",
+                "Today Suggestion Daily\nPlan With AI",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

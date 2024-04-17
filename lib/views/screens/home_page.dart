@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:project/views/widgets/daily_plan_widget.dart';
 import '../../models/core/recipe.dart';
 import '../../models/helper/recipe_helper.dart';
 import '../../views/screens/delicious_today_page.dart';
@@ -14,7 +11,7 @@ import '../../views/widgets/dummy_search_bar.dart';
 import '../../views/widgets/featured_recipe_card.dart';
 import '../../views/widgets/recipe_tile.dart';
 import '../../views/widgets/recommendation_recipe_card.dart';
-import 'daily_plan_suggestion.dart';
+import '../widgets/daily_plan_widget.dart';
 
 class HomePage extends StatelessWidget {
   final List<Recipe> featuredRecipe = RecipeHelper.featuredRecipe;
@@ -46,7 +43,7 @@ class HomePage extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  height: 278,
+                  height: 295,
                   color: AppColor.primary,
                 ),
                 // Section 1 - Content
@@ -70,7 +67,7 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Delicious Today',
+                            'Vegan Delicious Today',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -84,7 +81,8 @@ class HomePage extends StatelessWidget {
                             },
                             child: Text('see all'),
                             style: TextButton.styleFrom(
-                                foregroundColor: Colors.white, textStyle: TextStyle(
+                                foregroundColor: Colors.white,
+                                textStyle: TextStyle(
                                     fontWeight: FontWeight.w400, fontSize: 14)),
                           ),
                         ],
@@ -117,41 +115,15 @@ class HomePage extends StatelessWidget {
             ),
           ),
           // Section 2 - Recommendation Recipe
-          Container(
-            margin: EdgeInsets.only(top: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header
-                Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    'Today recommendation based on your taste...',
-                    style: TextStyle(color: Colors.grey.shade800),
-                  ),
-                ),
-                // Content
-                Container(
-                  height: 174,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: recommendationRecipe.length,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    separatorBuilder: (context, index) {
-                      return SizedBox(width: 16);
-                    },
-                    itemBuilder: (context, index) {
-                      return RecommendationRecipeCard(
-                          data: recommendationRecipe[index]);
-                    },
-                  ),
-                )
-              ],
-            ),
-          ),
+          recommendationRecipeWidget(
+              newlyPostedRecipe, 'Breakfast recommendation just for you...'),
+          //container for show and calculate daily calories
+          dailyCalories(),
+          //container for show and calculate daily calories
+          recommendationRecipeWidget(
+              featuredRecipe, 'Lunch recommendation just for you...'),
+          recommendationRecipeWidget(
+              recommendationRecipe, 'Dinner recommendation just for you...'),
           // Section 3 - Newly Posted
           Container(
             margin: EdgeInsets.only(top: 14, bottom: 12),
@@ -177,7 +149,7 @@ class HomePage extends StatelessWidget {
                       },
                       child: Text('see all'),
                       style: TextButton.styleFrom(
-                          primary: Colors.black,
+                          foregroundColor: Colors.black,
                           textStyle: TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 14)),
                     ),
@@ -186,7 +158,7 @@ class HomePage extends StatelessWidget {
                 // Content
                 ListView.separated(
                   shrinkWrap: true,
-                  itemCount: 3 ?? newlyPostedRecipe.length,
+                  itemCount: 3,
                   physics: NeverScrollableScrollPhysics(),
                   separatorBuilder: (context, index) {
                     return SizedBox(height: 16);
@@ -204,4 +176,89 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget recommendationRecipeWidget(recommendationRecipe, title) {
+  return Container(
+    margin: EdgeInsets.only(top: 16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Header
+        Container(
+          margin: EdgeInsets.only(bottom: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Text(
+            title,
+            style: TextStyle(
+                color: Colors.grey.shade800,
+                fontSize: 14,
+                decoration: TextDecoration.underline,
+                decorationColor: AppColor.primary),
+          ),
+        ),
+        // Content
+        Container(
+          height: 174,
+          child: ListView.separated(
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemCount: recommendationRecipe.length,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            separatorBuilder: (context, index) {
+              return SizedBox(width: 16);
+            },
+            itemBuilder: (context, index) {
+              return RecommendationRecipeCard(
+                  data: recommendationRecipe[index]);
+            },
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget dailyCalories() {
+  return Container(
+    height: 150,
+    padding: EdgeInsets.symmetric(vertical: 12),
+    margin: EdgeInsets.only(left: 14, right: 14, top: 12),
+    decoration: BoxDecoration(
+        color: AppColor.primary,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40), bottomRight: Radius.circular(40)),
+        image: DecorationImage(
+            image: AssetImage(
+              'assets/images/bg1.jpeg',
+            ),
+            fit: BoxFit.cover,
+            opacity: 0.3),
+        gradient: LinearGradient(
+            colors: [AppColor.primary, Colors.grey.shade700],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter)),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Today you gained:",
+          style: TextStyle(
+              color: AppColor.whiteSoft,
+              fontSize: 18,
+              fontFamily: 'inter',
+              fontWeight: FontWeight.w600),
+        ),
+        Text(
+          "450 Calories",
+          style: TextStyle(
+              color: AppColor.whiteSoft,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'inter',
+              fontSize: 28),
+        ),
+      ],
+    ),
+  );
 }
