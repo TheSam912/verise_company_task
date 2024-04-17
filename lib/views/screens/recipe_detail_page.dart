@@ -162,7 +162,10 @@ class _RecipeDetailPageState extends State<RecipeDetailPage>
                             child: Container(
                               child: ElevatedButton(
                                 onPressed: () {},
-                                child: Text('Post Review',style: TextStyle(color: AppColor.primary),),
+                                child: Text(
+                                  'Post Review',
+                                  style: TextStyle(color: AppColor.primary),
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColor.whiteSoft,
                                 ),
