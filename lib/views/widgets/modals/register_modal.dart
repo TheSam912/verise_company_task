@@ -47,21 +47,21 @@ class RegisterModal extends StatelessWidget {
                 ),
               ),
               // Form
-              CustomTextField(title: 'Email', hint: 'youremail@email.com'),
+              CustomTextField(title: 'Email', hint: 'youremail@email.com',enable: true),
               CustomTextField(
                   title: 'Full Name',
                   hint: 'Your Full Name',
-                  margin: EdgeInsets.only(top: 16)),
+                  margin: EdgeInsets.only(top: 16),enable: true),
               CustomTextField(
                   title: 'Password',
                   hint: '**********',
                   obsecureText: true,
-                  margin: EdgeInsets.only(top: 16)),
+                  margin: EdgeInsets.only(top: 16),enable: true),
               CustomTextField(
                   title: 'Retype Password',
                   hint: '**********',
                   obsecureText: true,
-                  margin: EdgeInsets.only(top: 16)),
+                  margin: EdgeInsets.only(top: 16),enable: true),
               // Register Button
               Container(
                 margin: EdgeInsets.only(top: 32, bottom: 6),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project/views/screens/page_switcher.dart';
+import 'package:project/views/widgets/modals/modify_profile_modal.dart';
 import '../../views/utils/AppColor.dart';
 import '../../views/widgets/user_info_tile.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/modals/login_modal.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -26,7 +30,20 @@ class ProfilePage extends StatelessWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.white,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20))),
+                isScrollControlled: true,
+                builder: (context) {
+                  return ModifyProfileModal();
+                },
+              );
+            },
             child: Text(
               'Edit',
               style: TextStyle(
@@ -114,6 +131,7 @@ class ProfilePage extends StatelessWidget {
                         value: '176 cm',
                       ),
                     ),
+                    SizedBox(width: 8),
                     Flexible(
                       flex: 5,
                       child: UserInfoTile(
@@ -134,6 +152,7 @@ class ProfilePage extends StatelessWidget {
                         value: '26',
                       ),
                     ),
+                    SizedBox(width: 8),
                     Flexible(
                       flex: 5,
                       child: UserInfoTile(

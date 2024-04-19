@@ -46,12 +46,14 @@ class LoginModal extends StatelessWidget {
                 ),
               ),
               // Form
-              CustomTextField(title: 'Email', hint: 'youremail@email.com'),
+              CustomTextField(
+                  title: 'Email', hint: 'youremail@email.com', enable: true),
               CustomTextField(
                   title: 'Password',
                   hint: '**********',
                   obsecureText: true,
-                  margin: EdgeInsets.only(top: 16)),
+                  margin: EdgeInsets.only(top: 16),
+                  enable: true),
               // Log in Button
               Container(
                 margin: EdgeInsets.only(top: 32, bottom: 6),
@@ -71,7 +73,8 @@ class LoginModal extends StatelessWidget {
                           fontFamily: 'inter')),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)), backgroundColor: AppColor.primarySoft,
+                        borderRadius: BorderRadius.circular(10)),
+                    backgroundColor: AppColor.primarySoft,
                   ),
                 ),
               ),

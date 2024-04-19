@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final String hint;
   final TextEditingController? controller;
   final bool obsecureText;
+  final bool enable;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
 
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
     required this.hint,
     this.controller,
     this.obsecureText = false,
+    required this.enable,
     this.padding,
     this.margin,
   });
@@ -49,7 +51,9 @@ class CustomTextField extends StatelessWidget {
               obscureText: obsecureText,
               decoration: InputDecoration(
                 hintText: '$hint',
-                hintStyle: TextStyle(fontSize: 14, color: Colors.grey[400]),
+                hintStyle: TextStyle(
+                    fontSize: 14,
+                    color: enable ? Colors.black : Colors.grey[400]),
                 contentPadding: EdgeInsets.only(left: 16),
                 border: InputBorder.none,
               ),
